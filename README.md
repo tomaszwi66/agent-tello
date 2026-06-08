@@ -1,24 +1,43 @@
 # Agent Tello
 
-Offline physical AI agent for DJI/Ryze Tello.
+> **License notice:** This project is source-available proprietary software, not open-source software.
+>
+> Public access to this repository does not grant permission to use, run, modify, redistribute, deploy, sell, sublicense, or incorporate this software into another product or service.
+>
+> Operational, educational, research, commercial, classroom, laboratory, or demonstration use requires a separate written license from the copyright owner.
+>
+> See `LICENSE.md`.
 
-Author: Tomasz Wietrzykowski.
+Local control, perception, and voice system for DJI/Ryze Tello.
 
-Agent Tello turns a low-cost educational drone into a local embodied AI agent. It can fly indoors using real-time monocular depth estimation, avoid nearby obstacles, follow open space, listen to English voice commands, speak back, describe its own camera view, and search for objects using YOLO plus a local Ollama vision model.
+Author and copyright owner: Tomasz Wietrzykowski.
 
-The system is designed for developers, schools, robotics clubs, AI educators, and local AI experiments. It does not use cloud APIs during flight.
+Agent Tello is a local software system for indoor experiments with the DJI/Ryze Tello drone. It combines live camera input, monocular depth estimation, reactive navigation, object detection, speech input, speech output, and local Ollama models.
+
+The flight control loop is designed to stay separate from the language and vision model layer. Navigation can run in depth-only mode without an LLM. Voice and vision features can be enabled for higher-level commands, object search, and camera descriptions.
+
+The system is intended as a licensed product for developers, schools, robotics clubs, AI educators, and local robotics experiments.
+
+The flight runtime does not require cloud APIs. Setup steps may download third-party packages, models, or assets depending on the selected installation options.
+
+## Current Status
+
+This project is experimental software for supervised indoor testing.
+
+It is not certified, not safety-critical, and not intended for unsupervised flight, outdoor operation, public spaces, crowded rooms, industrial use, medical use, security use, or any environment where a failure could cause harm.
 
 ## What It Can Do
 
-- Autonomous indoor exploration using a live estimated depth map.
-- Smooth forward flight with reactive yaw control.
-- Local obstacle avoidance around walls, furniture, doors, windows, mirrors, screens, corners, tables, and chairs.
-- Depth-only autonomous mode without any LLM.
-- Full voice agent mode with English speech input and speech output.
-- Local Ollama integration for command interpretation and visual description.
-- Object search with YOLO for common classes such as person, chair, bottle, laptop, TV, cat, dog, table, and similar COCO objects.
-- Vision model fallback for open-ended questions and non-COCO targets.
-- Flight logs with events, depth metrics, RC commands, mission state, and failures.
+- Run autonomous indoor exploration using a live estimated depth map.
+- Move forward while steering toward open space.
+- React to nearby obstacles using depth sector metrics.
+- Avoid common indoor structures such as walls, furniture, doors, corners, tables, chairs, windows, mirrors, and screens.
+- Run a depth-only autonomous mode without Ollama or any LLM.
+- Run a voice agent mode with English speech input and speech output.
+- Use local Ollama models for command interpretation and camera descriptions.
+- Search for common objects using YOLO.
+- Use a local vision model as a fallback for open-ended questions and non-COCO targets.
+- Write flight logs with events, depth metrics, RC commands, mission state, and failure information.
 
 ## Tested Hardware
 
@@ -28,7 +47,7 @@ This release was tested on:
 - GPU: NVIDIA RTX 4080 Laptop GPU.
 - VRAM: 12 GB.
 - Drone: DJI/Ryze Tello.
-- Audio: Samsung Galaxy Buds FE Bluetooth headset, plus laptop microphone and speaker fallback.
+- Audio: Samsung Galaxy Buds FE Bluetooth headset, laptop microphone, and laptop speaker fallback.
 - Environment: indoor apartment, daylight, corridors, rooms, open doors, furniture, glass, mirrors, windows, and screens.
 
 ## Recommended Hardware
@@ -39,29 +58,34 @@ For the full voice and vision agent:
 - Python 3.11.
 - NVIDIA GPU with CUDA support.
 - 8 GB VRAM minimum recommended.
-- 12 GB VRAM recommended for smoother depth plus vision model usage.
-- 16 GB system RAM minimum, 32 GB recommended.
+- 12 GB VRAM recommended for smoother depth and vision model usage.
+- 16 GB system RAM minimum.
+- 32 GB system RAM recommended.
 - DJI/Ryze Tello connected over the Tello Wi-Fi network.
 - Local Ollama installation.
 - At least one local Ollama vision model.
 
-Depth-only navigation can run with less memory, but the full agent is intended for a CUDA laptop or desktop GPU.
+Depth-only navigation can run with less memory. The full agent is intended for a CUDA laptop or desktop GPU.
 
 ## Safety First
 
 This is a real flying robot. It can injure people, damage objects, or crash.
 
+Use this software only in a controlled indoor test area and only under direct human supervision.
+
 - Fly indoors only in a clear test area.
 - Use good daylight or bright, stable indoor lighting.
 - Keep people, pets, fragile objects, open windows, liquids, and faces away from the flight path.
 - Keep the battery above 50 percent while testing.
-- Keep one hand near the keyboard for Ctrl+C or emergency landing.
-- Do not fly near stairs, balconies, open windows, or crowded rooms.
+- Keep one hand near the keyboard for `Ctrl+C` or emergency landing.
+- Do not fly near stairs, balconies, open windows, mirrors, crowded rooms, or fragile objects.
 - Do not use this software for safety-critical operation.
-- Tello has a narrow field of view, Wi-Fi latency, no real SLAM, and no hardware obstacle sensors.
-- Monocular depth is an estimate, not a measurement guarantee.
+- Do not rely on monocular depth as a guaranteed distance measurement.
+- Test with short flights before longer runs.
 
-The software reduces risk, but it does not guarantee collision-free flight.
+The Tello has a narrow field of view, Wi-Fi latency, no real SLAM, and no hardware obstacle sensors. Monocular depth is an estimate, not a measurement guarantee.
+
+The software can reduce some risks, but it does not guarantee collision-free flight.
 
 ## Repository Contents
 
@@ -84,11 +108,11 @@ scripts/
   download_yolo.py       YOLO model downloader
   download_whisper.py    Whisper model downloader
 
-install.ps1         Windows setup script
-run_depth_only.ps1  Depth-only launcher
-run_agent.ps1       Full agent launcher
-requirements.txt    Python dependencies
-LICENSE.md               Proprietary commercial license
+install.ps1              Windows setup script
+run_depth_only.ps1       Depth-only launcher
+run_agent.ps1            Full agent launcher
+requirements.txt         Python dependencies
+LICENSE.md               Proprietary source-available commercial license
 ```
 
 ## Screenshots
@@ -100,6 +124,10 @@ Live drone camera, estimated depth view, object detections, and flight telemetry
 ![Agent Tello screen 3](screen3.png)
 
 ## Installation
+
+The following instructions are provided for licensed users only.
+
+Possession of this repository, including a public GitHub clone, download, or fork, does not grant permission to install, run, deploy, modify, redistribute, or use the software without a valid license.
 
 Open PowerShell inside the project folder.
 
@@ -133,6 +161,8 @@ Default roles:
 
 You can change both from the command line.
 
+If these model names are aliases from your local Ollama setup, replace them with the model names available in your installation.
+
 ## Before Every Flight
 
 1. Charge the Tello battery.
@@ -165,12 +195,12 @@ Direct Python command:
 .\.venv\Scripts\python.exe scripts\s5_forward_yaw.py --duration 60
 ```
 
-What to expect:
+Expected behavior:
 
 - Tello takes off.
 - The depth pipeline warms up.
 - The drone starts moving forward and steering toward open space.
-- It slows down near obstacles.
+- It slows down near nearby obstacles.
 - It turns when it reaches a wall, corner, or dead end.
 - It lands after the selected duration or when interrupted.
 
@@ -249,6 +279,8 @@ If a Bluetooth headset cuts off the beginning of speech, use `--listen-input-war
 
 Safety commands such as `land`, `stop`, and `emergency stop motors` are handled by a deterministic parser before the LLM.
 
+`Emergency stop motors` is a last-resort command. It may immediately stop the motors and cause the drone to fall.
+
 ## Architecture
 
 ```text
@@ -309,7 +341,7 @@ Logs are not intended for GitHub commits.
 
 ### Ollama is slow
 
-- Use a smaller vision model, for example `qwen2.5vl:3b`.
+- Use a smaller vision model.
 - Reduce other GPU load.
 - Use depth-only mode for navigation tests.
 
@@ -329,11 +361,16 @@ Logs are not intended for GitHub commits.
 
 ## Commercial License
 
-This product is proprietary commercial software unless you receive a separate written license.
+This product is proprietary source-available commercial software unless you receive a separate written license.
 
-You may not redistribute, resell, sublicense, publish, or share the source code, binaries, trained assets, or modified versions without written permission from the copyright owner.
+You may not use, run, modify, deploy, redistribute, resell, sublicense, publish, mirror, share, or incorporate the source code, binaries, trained assets, modified versions, or derived builds without written permission from the copyright owner.
 
 See `LICENSE.md`.
 
-Third-party dependencies remain under their own licenses. Users are responsible for complying with DJI/Ryze Tello, Ollama, PyTorch, YOLO, Whisper, Piper, and model license terms.
+Third-party dependencies remain under their own licenses. Users are responsible for complying with DJI/Ryze Tello, Ollama, PyTorch, YOLO, Whisper, Piper, CUDA, ONNX Runtime, model, and dataset license terms.
 
+## Contact
+
+For licensing, permissions, partnerships, or written authorization, contact:
+
+Tomasz Wietrzykowski
