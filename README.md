@@ -1,5 +1,10 @@
 # Agent Tello
 
+<p align="left">
+  <img src="assets/agent-tello-banner.jpg" alt="Agent Tello official banner" width="100%">
+</p>
+
+
 > **License notice:** This project is source-available proprietary software, not open-source software.
 >
 > Public access to this repository does not grant permission to use, run, modify, redistribute, deploy, sell, sublicense, or incorporate this software into another product or service.
