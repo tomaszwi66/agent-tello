@@ -1,8 +1,7 @@
 # Agent Tello
 
-<p align="left">
-  <img src="assets/agent-tello-banner.jpg" alt="Agent Tello official banner" width="100%">
-</p>
+![Agent Tello official banner](agent-tello-banner.jpg)
+
 
 
 > **License notice:** This project is source-available proprietary software, not open-source software.
