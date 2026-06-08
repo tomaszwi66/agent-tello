@@ -1,0 +1,18 @@
+---extra-index-url https://download.pytorch.org/whl/cu124
+
+djitellopy==2.5.0
+numpy==1.26.4
+opencv-python==4.10.0.84
+pillow==11.0.0
+requests>=2.32.0
+
+torch==2.5.1
+transformers==4.46.2
+huggingface_hub>=0.26.0
+
+ultralytics==8.3.0
+
+faster-whisper>=1.1.0
+sounddevice>=0.5.0
+pyttsx3>=2.90
+piper-tts>=1.2.0

@@ -1,0 +1,31 @@
+Agent Tello GitHub release folder
+
+Author: Tomasz Wietrzykowski
+
+Included:
+- Python source code under src/
+- Product launch scripts under scripts/
+- Windows installer and launchers
+- English README
+- Proprietary commercial license
+- Requirements file
+- Empty logs/ and models/ folders with .gitkeep placeholders
+
+Excluded:
+- Virtual environments
+- Cache files
+- Flight logs
+- Local model weights
+- Android experimental build
+- Backups
+- Zip archives
+
+Recommended first command:
+.\install.ps1
+
+Depth-only flight:
+.\run_depth_only.ps1
+
+Full voice and vision agent:
+.\run_agent.ps1
+
