@@ -1,4 +1,4 @@
--# Proprietary Commercial License
+# Proprietary Commercial License
 
 Copyright (c) 2026 Tomasz Wietrzykowski. All rights reserved.
 
